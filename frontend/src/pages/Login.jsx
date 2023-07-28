@@ -1,14 +1,35 @@
+import { useState } from 'react'
 import '../App.css'
-import Header from '../components/Header'
-import Input from '../components/input'
+// import Header from '../components/Header'
+// import Input from '../components/input'
 
 function Login() {
+  let [userLogin, setUserLogin] = useState({
+    userDocument: '',
+    password: ''
+  })
+
+  const handleChange = (event) => {
+    setUserLogin({
+      ...userLogin,
+      [event.target.name]: event.target.value,
+    })
+  }
+
   return (
     <>
-      <Header userName={"Teste"} userDocument={"123456789-99"} />
       <h1>LOGIN</h1>
-      <Input inputProperties={{ label: "CPF ou CNPJ: ", type: "email", name: "userLogin" }}/>
-      <Input inputProperties={{ label: "Senha: ", type: "password", name: "userPassword" }}/>
+      <form>
+        <label htmlFor="">Login: 
+          <input type="text" name="userDocument" value={userLogin.userDocument} onChange={handleChange} />
+        </label>
+        <label htmlFor="">Senha: 
+          <input type="password" name="password" value={userLogin.password} onChange={handleChange} />
+        </label>
+        <button type="submit">
+          Entrar
+        </button>
+      </form>
     </>
   )
 }
